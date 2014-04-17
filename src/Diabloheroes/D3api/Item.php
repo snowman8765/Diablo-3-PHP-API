@@ -41,4 +41,63 @@ class Item
             $this->data = json_decode($this->data, true);
     }
 
+    public function getId()
+    {
+        return $this->data['id'];
+    }
+
+    public function getName()
+    {
+        return $this->data['name'];
+    }
+
+    public function getIcon()
+    {
+        return $this->data['icon'];
+    }
+
+    public function getDisplayColor()
+    {
+        return $this->data['displayColor'];
+    }
+
+    public function getTooltipParams()
+    {
+        return $this->data['tooltipParams'];
+    }
+
+    public function getRequiredLevel()
+    {
+        return $this->data['requiredLevel'];
+    }
+
+    public function getItemLevel()
+    {
+        return $this->data['itemLevel'];
+    }
+
+    public function getBonusAffixes()
+    {
+        return $this->data['bonusAffixes'];
+    }
+
+    public function getBonusAffixesMax()
+    {
+        return $this->data['bonusAffixesMax'];
+    }
+
+    public function getAccountBound()
+    {
+        return $this->data['accountBound'];
+    }
+
+    public function getTypeName()
+    {
+        return $this->data['typeName'];
+    }
+
+    public function getType()
+    {
+//        return $this->
+    }
 }
