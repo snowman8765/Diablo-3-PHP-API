@@ -99,6 +99,9 @@ Library to connect to the Diablo 3 API
     // returns an array with the stat as key, value as value
     $hero->getStats();
 
+    // returns an array of all the items, see item usage
+    $hero->getItems();
+
     // returns the value of a stat
     $hero->getStat(Hero::ARMOR); // or another stat, see hero constants
 
