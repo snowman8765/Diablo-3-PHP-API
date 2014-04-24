@@ -102,7 +102,7 @@ Library to connect to the Diablo 3 API
     // returns the value of a stat
     $hero->getStat(Hero::ARMOR); // or another stat, see hero constants
 
-    //these methods should speak for themselfs
+    // these methods should speak for themself
     $hero->getId();
     $hero->getName();
     $hero->getClass(); // returns class as string
@@ -119,4 +119,35 @@ Library to connect to the Diablo 3 API
     $hero->getEliteKills();
 
 # Item Usage
-Coming soon
+    use Diabloheroes\D3api\Item;
+
+    $item = new Item("item/CkQI15rXiQUSBwgEFX_5Tl0d8nAHrR2aBgDLHSK8Wy8dnQeVJB1RUwyyIgsIARWKQgMAGA4gKjCJAjjXA0AASA9QDmCRBBj-5ffUC1AEWAI", Item::EU);
+
+    $item->fetch();
+
+    // these methods should speak for themself
+    $item->getId();
+    $item->getName();
+    $item->getIcon();
+    $item->getDisplayColor();
+    $item->getTooltipParams();
+    $item->getRequiredLevel();
+    $item->getItemLevel();
+    $item->getBonusAffixes();
+    $item->getBonusAffixesMax();
+    $item->getAccountBound();
+    $item->getTypeName();
+    $item->getTwoHanded();
+    $item->getTypeId();
+    $item->getArmor();
+    $item->getArmorMin();
+    $item->getArmorMax();
+    $item->getAttributes();
+    $item->getPrimaryAttributes();
+    $item->getSecondaryAttributes();
+    $item->getPassiveAttributes();
+    $item->getRawAttributes();
+    $item->getRandomAffixes();
+    $item->getGems();
+    $item->getSocketEffects();
+    $item->getCraftedBy();

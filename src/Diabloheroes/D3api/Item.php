@@ -96,8 +96,64 @@ class Item
         return $this->data['typeName'];
     }
 
-    public function getType()
+    public function getTwoHanded()
     {
-//        return $this->
+        return $this->data['type']['twoHanded'];
+    }
+
+    public function getTypeId()
+    {
+        return $this->data['type']['id'];
+    }
+
+    public function getArmor()
+    {
+        return $this->data['armor'];
+    }
+
+    public function getArmorMin()
+    {
+        return $this->data['armor']['min'];
+    }
+
+    public function getArmorMax()
+    {
+        return $this->data['armor']['max'];
+    }
+
+    public function getAttributes(){
+        return $this->data['attributes'];
+    }
+
+    public function getPrimaryAttributes(){
+        return $this->data['attributes']['primary'];
+    }
+
+    public function getSecondaryAttributes(){
+        return $this->data['attributes']['secondary'];
+    }
+
+    public function getPassiveAttributes(){
+        return $this->data['attributes']['passive'];
+    }
+
+    public function getRawAttributes(){
+        return $this->data['attributesRaw'];
+    }
+
+    public function getRandomAffixes(){
+        return $this->data['attributesRaw'];
+    }
+
+    public function getGems(){
+        return $this->data['gems'];
+    }
+
+    public function getSocketEffects(){
+        return $this->data['socketEffects'];
+    }
+
+    public function getCraftedBy(){
+        return $this->data['socketEffects'];
     }
 }

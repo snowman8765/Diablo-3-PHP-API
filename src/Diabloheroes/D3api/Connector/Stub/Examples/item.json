@@ -42,7 +42,11 @@
             "affixType" : "default",
             "color" : "blue"
         } ],
-        "passive" : [ ]
+        "passive" : [ {
+            "text" : "+124 Fire Resistance",
+            "affixType" : "default",
+            "color" : "blue"
+        } ]
     },
     "attributesRaw" : {
         "Armor_Item" : {
