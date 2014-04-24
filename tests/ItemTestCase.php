@@ -33,4 +33,34 @@ class ItemTestCase extends \PHPUnit_Framework_TestCase{
     {
         $this->assertSame("Helm_208", $this->item->getId());
     }
+
+	public function test_getIcon()
+	{
+		$this->assertSame("helm_208_wizard_male", $this->item->getIcon());
+	}
+
+	public function test_getDisplayColor()
+	{
+		$this->assertSame("yellow", $this->item->getDisplayColor());
+	}
+
+	public function test_getTooltipParams()
+	{
+		$this->assertSame("item/CkQI15rXiQUSBwgEFX_5Tl0d8nAHrR2aBgDLHSK8Wy8dnQeVJB1RUwyyIgsIARWKQgMAGA4gKjCJAjjXA0AASA9QDmCRBBj-5ffUC1AEWAI", $this->item->getTooltipParams());
+	}
+
+	public function test_getReguiredLevel()
+	{
+		$this->assertSame(70, $this->item->getRequiredLevel());
+	}
+
+	public function test_getItemLevel()
+	{
+		$this->assertSame(70, $this->item->getItemLevel());
+	}
+
+	public function test_getBonusAffixes()
+	{
+		$this->assertSame(0, $this->item->getBonusAffixes());
+	}
 } 
