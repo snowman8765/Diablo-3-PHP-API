@@ -174,4 +174,28 @@ class Hero
 
         return $items;
     }
+
+    public function getActiveSkills(){
+        $skills = array();
+
+        foreach($this->data['skills']['active'] as $skill)
+        {
+            if(!empty($skill))
+                $skills[] = new ActiveSkill($skill);
+        }
+
+        return $skills;
+    }
+
+    public function getPassiveSkills(){
+        $skills = array();
+
+        foreach($this->data['skills']['passive'] as $skill)
+        {
+            if(!empty($skill))
+                $skills[] = new PassiveSkill($skill);
+        }
+
+        return $skills;
+    }
 }
