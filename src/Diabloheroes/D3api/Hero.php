@@ -68,8 +68,15 @@ class Hero
     {
         $this->data = $this->connector->get($this->region, $this->battletag, $this->id);
 
-        if ($this->data != false)
-            $this->data = json_decode($this->data, true);
+        if ($this->data == false)
+            return false;
+
+        $this->data = json_decode($this->data, true);
+
+        if(isset($this->data['code']))
+            return false;
+
+        return true;
     }
 
     public function getId()
