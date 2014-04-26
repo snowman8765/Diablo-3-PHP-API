@@ -124,8 +124,11 @@ class Career
         return $this->data['kills']['hardcoreMonsters'];
     }
 
-    public function getTimePlayed($class)
+    public function getTimePlayed($class = null)
     {
+        if(is_null($class))
+            return $this->data['timePlayed'];
+
         return $this->data['timePlayed'][$class];
     }
 
