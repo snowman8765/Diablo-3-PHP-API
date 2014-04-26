@@ -146,7 +146,19 @@ class Item
     }
 
     public function getGems(){
-        return $this->data['gems'];
+        $gems = array();
+
+        foreach($this->data['gems'] as $key => $gem)
+        {
+            $gems[] = new Gem($gem, $key + 1);
+        }
+
+        return $gems;
+    }
+
+    public function getGemCount()
+    {
+        return count($this->data['gems']);
     }
 
     public function getSocketEffects(){
