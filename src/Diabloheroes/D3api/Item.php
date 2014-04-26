@@ -108,17 +108,26 @@ class Item
 
     public function getArmor()
     {
-        return $this->data['armor'];
+        if(isset($this->data['armor']))
+            return $this->data['armor'];
+
+        return array();
     }
 
     public function getArmorMin()
     {
-        return $this->data['armor']['min'];
+        if(isset($this->data['armor']))
+            return $this->data['armor']['min'];
+
+        return 0;
     }
 
     public function getArmorMax()
     {
-        return $this->data['armor']['max'];
+        if(isset($this->data['armor']))
+            return $this->data['armor']['max'];
+
+        return 0;
     }
 
     public function getAttributes(){
