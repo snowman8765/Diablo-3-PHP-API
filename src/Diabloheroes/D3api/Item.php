@@ -10,178 +10,186 @@ use Diabloheroes\D3api\Connector\Item as Connector;
 
 class Item
 {
-    public $connector;
+	public $connector;
 
-    private $params;
+	private $params;
 
-    private $region;
+	private $region;
 
-    public $data;
+	public $data;
 
-    const EU = 'eu';
-    const US = 'us';
-    const KR = 'kr';
+	private $slot;
 
-    public function __construct($params, $region, $initialData = null)
-    {
-        $this->params = $params;
-        $this->region = $region;
+	const EU = 'eu';
+	const US = 'us';
+	const KR = 'kr';
 
-        if (isset($initialData))
-            $this->data = $initialData;
+	public function __construct($params, $region, $initialData = null, $slot = null)
+	{
+		$this->params = $params;
+		$this->region = $region;
+		$this->slot = $slot;
 
-        $this->connector = new Connector();
-    }
-    
-    public function fetch()
-    {
-        $this->data = $this->connector->get($this->region, $this->params);
+		if (isset($initialData))
+			$this->data = $initialData;
 
-        if ($this->data == false)
-            return false;
+		$this->connector = new Connector();
+	}
 
-        $this->data = json_decode($this->data, true);
+	public function fetch()
+	{
+		$this->data = $this->connector->get($this->region, $this->params);
 
-        if(isset($this->data['code']))
-            return false;
+		if ($this->data == false)
+			return false;
 
-        return true;
-    }
+		$this->data = json_decode($this->data, true);
 
-    public function getId()
-    {
-        return $this->data['id'];
-    }
+		if(isset($this->data['code']))
+			return false;
 
-    public function getName()
-    {
-        return $this->data['name'];
-    }
+		return true;
+	}
 
-    public function getIcon()
-    {
-        return $this->data['icon'];
-    }
+	public function getId()
+	{
+		return $this->data['id'];
+	}
 
-    public function getDisplayColor()
-    {
-        return $this->data['displayColor'];
-    }
+	public function getName()
+	{
+		return $this->data['name'];
+	}
 
-    public function getTooltipParams()
-    {
-        return $this->data['tooltipParams'];
-    }
+	public function getIcon()
+	{
+		return $this->data['icon'];
+	}
 
-    public function getRequiredLevel()
-    {
-        return $this->data['requiredLevel'];
-    }
+	public function getDisplayColor()
+	{
+		return $this->data['displayColor'];
+	}
 
-    public function getItemLevel()
-    {
-        return $this->data['itemLevel'];
-    }
+	public function getTooltipParams()
+	{
+		return $this->data['tooltipParams'];
+	}
 
-    public function getBonusAffixes()
-    {
-        return $this->data['bonusAffixes'];
-    }
+	public function getRequiredLevel()
+	{
+		return $this->data['requiredLevel'];
+	}
 
-    public function getBonusAffixesMax()
-    {
-        return $this->data['bonusAffixesMax'];
-    }
+	public function getItemLevel()
+	{
+		return $this->data['itemLevel'];
+	}
 
-    public function getAccountBound()
-    {
-        return $this->data['accountBound'];
-    }
+	public function getBonusAffixes()
+	{
+		return $this->data['bonusAffixes'];
+	}
 
-    public function getTypeName()
-    {
-        return $this->data['typeName'];
-    }
+	public function getBonusAffixesMax()
+	{
+		return $this->data['bonusAffixesMax'];
+	}
 
-    public function getTwoHanded()
-    {
-        return $this->data['type']['twoHanded'];
-    }
+	public function getAccountBound()
+	{
+		return $this->data['accountBound'];
+	}
 
-    public function getTypeId()
-    {
-        return $this->data['type']['id'];
-    }
+	public function getTypeName()
+	{
+		return $this->data['typeName'];
+	}
 
-    public function getArmor()
-    {
-        if(isset($this->data['armor']))
-            return $this->data['armor'];
+	public function getTwoHanded()
+	{
+		return $this->data['type']['twoHanded'];
+	}
 
-        return array();
-    }
+	public function getTypeId()
+	{
+		return $this->data['type']['id'];
+	}
 
-    public function getArmorMin()
-    {
-        if(isset($this->data['armor']))
-            return $this->data['armor']['min'];
+	public function getArmor()
+	{
+		if(isset($this->data['armor']))
+			return $this->data['armor'];
 
-        return 0;
-    }
+		return array();
+	}
 
-    public function getArmorMax()
-    {
-        if(isset($this->data['armor']))
-            return $this->data['armor']['max'];
+	public function getArmorMin()
+	{
+		if(isset($this->data['armor']))
+			return $this->data['armor']['min'];
 
-        return 0;
-    }
+		return 0;
+	}
 
-    public function getAttributes(){
-        return $this->data['attributes'];
-    }
+	public function getArmorMax()
+	{
+		if(isset($this->data['armor']))
+			return $this->data['armor']['max'];
 
-    public function getPrimaryAttributes(){
-        return $this->data['attributes']['primary'];
-    }
+		return 0;
+	}
 
-    public function getSecondaryAttributes(){
-        return $this->data['attributes']['secondary'];
-    }
+	public function getAttributes(){
+		return $this->data['attributes'];
+	}
 
-    public function getPassiveAttributes(){
-        return $this->data['attributes']['passive'];
-    }
+	public function getPrimaryAttributes(){
+		return $this->data['attributes']['primary'];
+	}
 
-    public function getRawAttributes(){
-        return $this->data['attributesRaw'];
-    }
+	public function getSecondaryAttributes(){
+		return $this->data['attributes']['secondary'];
+	}
 
-    public function getRandomAffixes(){
-        return $this->data['attributesRaw'];
-    }
+	public function getPassiveAttributes(){
+		return $this->data['attributes']['passive'];
+	}
 
-    public function getGems(){
-        $gems = array();
+	public function getRawAttributes(){
+		return $this->data['attributesRaw'];
+	}
 
-        foreach($this->data['gems'] as $key => $gem)
-        {
-            $gems[] = new Gem($gem, $key + 1);
-        }
+	public function getRandomAffixes(){
+		return $this->data['attributesRaw'];
+	}
 
-        return $gems;
-    }
+	public function getGems(){
+		$gems = array();
 
-    public function getGemCount()
-    {
-        return count($this->data['gems']);
-    }
+		foreach($this->data['gems'] as $key => $gem)
+		{
+			$gems[] = new Gem($gem, $key + 1);
+		}
 
-    public function getSocketEffects(){
-        return $this->data['socketEffects'];
-    }
+		return $gems;
+	}
 
-    public function getCraftedBy(){
-        return $this->data['socketEffects'];
-    }
+	public function getGemCount()
+	{
+		return count($this->data['gems']);
+	}
+
+	public function getSocketEffects(){
+		return $this->data['socketEffects'];
+	}
+
+	public function getCraftedBy(){
+		return $this->data['socketEffects'];
+	}
+
+	public function getSlot()
+	{
+		return $this->slot;
+	}
 }

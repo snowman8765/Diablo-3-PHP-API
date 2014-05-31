@@ -16,7 +16,7 @@ use Diabloheroes\D3api\Connector\Hero as Connector;
  */
 class Hero
 {
-    private $url = 'http://%s.battle.net/api/d3/profile/%s/hero/%s';
+	private $url = 'http://%s.battle.net/api/d3/profile/%s/hero/%s';
 
 	const LIFE = "life";
 	const DAMAGE = "damage";
@@ -48,154 +48,154 @@ class Hero
 	const PRIMARYRESOURCE = "primaryResource";
 	const SECONDARYRESOURCE = "secondaryResource";
 
-    const EU = 'eu';
-    const US = 'us';
-    const KR = 'kr';
-     
-    public function __construct($battletag, $id, $region, $initialData = null)
-    {
-        $this->battletag = str_replace('#', '-', $battletag);
-        $this->id = $id;
-        $this->region = $region;
+	const EU = 'eu';
+	const US = 'us';
+	const KR = 'kr';
 
-        if (isset($initialData))
-            $this->data = $initialData;
+	public function __construct($battletag, $id, $region, $initialData = null)
+	{
+		$this->battletag = str_replace('#', '-', $battletag);
+		$this->id = $id;
+		$this->region = $region;
 
-        $this->connector = new Connector();
-    }
+		if (isset($initialData))
+			$this->data = $initialData;
 
-    public function fetch()
-    {
-        $this->data = $this->connector->get($this->region, $this->battletag, $this->id);
+		$this->connector = new Connector();
+	}
 
-        if ($this->data == false)
-            return false;
+	public function fetch()
+	{
+		$this->data = $this->connector->get($this->region, $this->battletag, $this->id);
 
-        $this->data = json_decode($this->data, true);
+		if ($this->data == false)
+			return false;
 
-        if(isset($this->data['code']))
-            return false;
+		$this->data = json_decode($this->data, true);
 
-        return true;
-    }
+		if(isset($this->data['code']))
+			return false;
 
-    public function getId()
-    {
-        return $this->data['id'];
-    }
+		return true;
+	}
 
-    public function getName()
-    {
-        return $this->data['name'];
-    }
+	public function getId()
+	{
+		return $this->data['id'];
+	}
 
-    public function getClass()
-    {
-        return $this->data['class'];
-    }
+	public function getName()
+	{
+		return $this->data['name'];
+	}
 
-    public function getGender()
-    {
-        return $this->data['gender'];
-    }
+	public function getClass()
+	{
+		return $this->data['class'];
+	}
 
-    public function isMale()
-    {
-        return $this->data['gender'] == 0;
-    }
+	public function getGender()
+	{
+		return $this->data['gender'];
+	}
 
-    public function isFemale()
-    {
-        return $this->data['gender'] == 1;
-    }
+	public function isMale()
+	{
+		return $this->data['gender'] == 0;
+	}
 
-    public function getLevel()
-    {
-        return $this->data['level'];
-    }
+	public function isFemale()
+	{
+		return $this->data['gender'] == 1;
+	}
 
-    public function getParagonLevel()
-    {
-        return $this->data['paragonLevel'];
-    }
+	public function getLevel()
+	{
+		return $this->data['level'];
+	}
 
-    public function isHardcore()
-    {
-        return $this->getHardcore();
-    }
+	public function getParagonLevel()
+	{
+		return $this->data['paragonLevel'];
+	}
 
-    public function getHardcore()
-    {
-        return $this->data['hardcore'];
-    }
+	public function isHardcore()
+	{
+		return $this->getHardcore();
+	}
 
-    public function getDead()
-    {
-        return $this->data['dead'];
-    }
+	public function getHardcore()
+	{
+		return $this->data['hardcore'];
+	}
 
-    public function isDead()
-    {
-        return $this->getDead();
-    }
+	public function getDead()
+	{
+		return $this->data['dead'];
+	}
 
-    public function getLastUpdated()
-    {
-        return $this->data['last-updated'];
-    }
+	public function isDead()
+	{
+		return $this->getDead();
+	}
 
-    public function getEliteKills()
-    {
-        return $this->data['kills']['elites'];
-    }
+	public function getLastUpdated()
+	{
+		return $this->data['last-updated'];
+	}
 
-    public function getStats()
-    {
-        return $this->data['stats'];
-    }
+	public function getEliteKills()
+	{
+		return $this->data['kills']['elites'];
+	}
 
-    public function getStat($stat)
-    {
-        return $this->data['stats'][$stat];
-    }
+	public function getStats()
+	{
+		return $this->data['stats'];
+	}
 
-    public function getItems()
-    {
-        $items = array();
+	public function getStat($stat)
+	{
+		return $this->data['stats'][$stat];
+	}
 
-        foreach($this->data['items'] as $item)
-        {
-            $newItem = new Item($item['tooltipParams'], $this->region, $item);
+	public function getItems()
+	{
+		$items = array();
 
-            $newItem->fetch();
+		foreach($this->data['items'] as $slot => $item)
+		{
+			$newItem = new Item($item['tooltipParams'], $this->region, $item, $slot);
 
-            $items[] = $newItem;
-        }
+			$newItem->fetch();
 
-        return $items;
-    }
+			$items[] = $newItem;
+		}
 
-    public function getActiveSkills(){
-        $skills = array();
+		return $items;
+	}
 
-        foreach($this->data['skills']['active'] as $skill)
-        {
-            if(!empty($skill))
-                $skills[] = new ActiveSkill($skill);
-        }
+	public function getActiveSkills(){
+		$skills = array();
 
-        return $skills;
-    }
+		foreach($this->data['skills']['active'] as $skill)
+		{
+			if(!empty($skill))
+				$skills[] = new ActiveSkill($skill);
+		}
 
-    public function getPassiveSkills(){
-        $skills = array();
+		return $skills;
+	}
 
-        foreach($this->data['skills']['passive'] as $skill)
-        {
-            if(!empty($skill))
-                $skills[] = new PassiveSkill($skill);
-        }
+	public function getPassiveSkills(){
+		$skills = array();
 
-        return $skills;
-    }
+		foreach($this->data['skills']['passive'] as $skill)
+		{
+			if(!empty($skill))
+				$skills[] = new PassiveSkill($skill);
+		}
+
+		return $skills;
+	}
 }
